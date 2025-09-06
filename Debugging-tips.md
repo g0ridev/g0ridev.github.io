@@ -42,5 +42,3 @@ This section collects lessons, patterns, and practices that push your C++ beyond
 👉 Add more `.md` files for each topic (like `unique-ptr.md`, `auto.md`, etc.), and link them here. GitHub Pages will render them as proper HTML without you writing HTML manually.  
 
 ---
-
-Do you want me to also turn the **code snippets you pasted** into their own `.md` lesson pages (like `unique-ptr.md` and `shared-ptr.md`), or just keep them inline in this overview for now?

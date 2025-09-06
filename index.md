@@ -1,4 +1,4 @@
-# LearnThruFailure 🚀  
+# LearnThruFailure (updated) 🚀  
 
 Learn C++ and systems programming by **failing forward**.  
 
@@ -8,7 +8,7 @@ Learn C++ and systems programming by **failing forward**.
 
 - [Challenges](./challenges.md)  
 - [About](./about.md)  
-- [Debugging](./debugging.md)  
+- [Debugging](./Debugging-tips.md)  
 
 ---
 
