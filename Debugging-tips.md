@@ -6,16 +6,24 @@ This section collects lessons, patterns, and practices that push your C++ beyond
 
 ## Topics  
 
+
+---
+ideas:
+- templates?
+- vectors?
+- classes?
+- auto?
+
 - **Smart Pointers & Ownership**  
-  - [`unique_ptr` example](./unique-ptr.md)  
-  - [`shared_ptr` example](./shared-ptr.md)  
+  - [`unique_ptr` example](./articles/unique-ptr.md)  
+  - [`shared_ptr` example](./articles/shared-ptr.md)  
 
 - **Initialization & Type Deduction**  
-  - [Uniform initialization `{}`](./initialization.md)  
-  - [`auto` and modern type deduction](./auto.md)  
+  - [Uniform initialization `{}`](./articles/initialization.md)  
+  - [`auto` and modern type deduction](./articles/auto.md)  
 
 - **Safer Abstractions**  
-  - [`std::optional` instead of sentinel values](./optional.md)  
+  - [`std::optional` instead of sentinel values](./articles/optional.md)  
   - RAII: Resource Acquisition Is Initialization  
   - Using `chrono` for time instead of `clock_t`  
 
