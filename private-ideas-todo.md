@@ -1,6 +1,42 @@
 todo:
-- insertion sort project 
-- article explainging project
+- insertion sort project  x 
+- article explainging project x 
+
+
+
+
+
+
+
+
+
+- fix the site md files and actually opens the specified file fodlers(10m)
+
+- add to insertion sort github levels.
+- add article part insertion sort level 1.
+- netowrking labs?
+
+ideas?
+- anti youtube artilces.
+- 
+chore:
+clean floor
+print grandmas reciept
+
+
+articles:
+---
+- leetcode problems
+- ds&a challenges
+- networks challenge
+- professional cpp tips
+
+
+
+
+
+
+
 
 
 

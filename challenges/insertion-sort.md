@@ -1,5 +1,5 @@
 # Master Insertion Sort: Round 1 - Foundation
-updated bruh
+
 *Learn the fundamentals of insertion sort through hands-on implementation*
 
 ---
