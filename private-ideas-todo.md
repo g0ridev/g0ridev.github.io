@@ -11,7 +11,12 @@ todo:
 
 
 - fix the site md files and actually opens the specified file fodlers(10m) x
-- md file wont render for insertion-sort.md
+- md file wont render for insertion-sort.md(10m) x
+- move challenges to articles, make articles seperated to folders of caetgories.(10m)
+- fill pages about,remove challenges. what shit i need?(10m)
+
+- leetcode article (1hr)
+ https://www.techinterviewhandbook.org/grind75/?weeks=26
 
 - add to insertion sort github levels.
 - add article part insertion sort level 1.
@@ -35,6 +40,7 @@ articles:
 
 
 
+https://www.techinterviewhandbook.org/grind75/?weeks=26
 
 
 
