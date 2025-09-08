@@ -14,6 +14,6 @@ Learn C++ and systems programming by **failing forward**.
 
 ## Start Here  
 
-- [Insertion Sort Challenge](./challenges/insertion-sort.md)
+- [Insertion Sort Challenge](./challenges/insertion-sort.html)
 
 trying to fix this...

@@ -10,7 +10,8 @@ todo:
 
 
 
-- fix the site md files and actually opens the specified file fodlers(10m)
+- fix the site md files and actually opens the specified file fodlers(10m) x
+- md file wont render for insertion-sort.md
 
 - add to insertion sort github levels.
 - add article part insertion sort level 1.
