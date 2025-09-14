@@ -1,11 +1,180 @@
-# g0ridev - Programming Tutorials
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>g0ridev - Programming Tutorials</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-Welcome to my site!
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            padding: 20px;
+        }
 
-## Articles
-- [LeetCode Sucks](articles/leetcode-sucks/)
-- [Professional C++](articles/professional-cpp/)
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
 
-## Projects
-- [Insertion Sort](projects/insertion-sort/)
-- [Two Sum](projects/two-sum/)
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        main {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: inline-block;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .link-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-decoration: none;
+            color: #495057;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .link-card:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .link-card h3 {
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        .link-card p {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            main {
+                padding: 30px 20px;
+            }
+            
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>g0ridev</h1>
+            <p class="subtitle">Programming Tutorials & Projects</p>
+        </header>
+        
+        <main>
+            <section class="section">
+                <h2>Articles</h2>
+                <div class="links-grid">
+                    <a href="articles/leetcode-sucks/" class="link-card">
+                        <h3>LeetCode Sucks</h3>
+                        <p>My thoughts on the problems with coding interview culture</p>
+                    </a>
+                    <a href="articles/professional-cpp/" class="link-card">
+                        <h3>Professional C++</h3>
+                        <p>Best practices and techniques for real-world C++ development</p>
+                    </a>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Projects</h2>
+                <div class="links-grid">
+                    <a href="projects/insertion-sort/" class="link-card">
+                        <h3>Insertion Sort</h3>
+                        <p>Implementation and analysis of the insertion sort algorithm</p>
+                    </a>
+                    <a href="projects/two-sum/" class="link-card">
+                        <h3>Two Sum</h3>
+                        <p>Classic array problem with multiple solution approaches</p>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 g0ridev. Built with HTML & CSS.</p>
+        </footer>
+    </div>
+</body>
+</html>

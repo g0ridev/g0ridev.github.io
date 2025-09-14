@@ -1,6 +1,24 @@
 todo:
-- insertion sort project  x 
-- article explainging project x 
+- networking articles projects section (1hr)
+
+- 3333 articles projects seciton (1hr)
+- stupid site wont fix (10m)
+- buy registration plate (10m) do it laeter need brown + nitro x
+- get event calendar mom (10m)
+
+
+
+
+from journal:
+- r assignemt can you plot function in cpp can you do it make visual.
+
+- speed visualizer(spped of loops, debug?)
+- projects pages: ds&a and visualize v1(sorting + raylib?)
+- leetcode fibonacci article
+- mergesort article
+- question quiz part TB -> quiz a day, or praticle problem theory teaching 
+- rental pap app(glorified spreadsheet)
+- add stylet o site.
 
 
 
@@ -10,13 +28,26 @@ todo:
 
 
 
-- fix the site md files and actually opens the specified file fodlers(10m) x
-- md file wont render for insertion-sort.md(10m) x
-- move challenges to articles, make articles seperated to folders of caetgories.(10m)
-- fill pages about,remove challenges. what shit i need?(10m)
 
-- leetcode article (1hr)
+
+
+
+
+
+
+
+
+
+
+
+
+- stupid index fucked up again wont render nor show the md file again(10m)
+
+
+- leetcode article (1hr) x
  https://www.techinterviewhandbook.org/grind75/?weeks=26
+
+- journal section/podcast? has recordings.
 
 - add to insertion sort github levels.
 - add article part insertion sort level 1.
