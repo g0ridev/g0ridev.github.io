@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>g0ridev - Programming Tutorials</title>
+    <title>g0ridev - Programming Tutorials & Analysis</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
         
         * {
             margin: 0;
@@ -13,402 +13,495 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f8fafc;
+            --accent-bg: #f1f5f9;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border-light: #e2e8f0;
+            --border-medium: #cbd5e1;
+            --accent-blue: #3b82f6;
+            --accent-blue-light: #dbeafe;
+            --accent-green: #10b981;
+            --accent-green-light: #d1fae5;
+            --code-bg: #f8fafc;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
         body {
-            font-family: 'JetBrains Mono', monospace;
-            background: #0a0a0f;
-            color: #e0e6ff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Animated grid background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridPulse 4s ease-in-out infinite;
-            z-index: -1;
-        }
-
-        @keyframes gridPulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.6; }
-        }
-
-        /* Floating geometric shapes */
-        .bg-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .shape {
-            position: absolute;
-            border: 1px solid rgba(255, 0, 255, 0.2);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .shape:nth-child(1) {
-            width: 60px;
-            height: 60px;
-            top: 20%;
-            left: 10%;
-            border-color: rgba(0, 255, 255, 0.3);
-            animation-delay: -1s;
-        }
-
-        .shape:nth-child(2) {
-            width: 80px;
-            height: 80px;
-            top: 60%;
-            right: 15%;
-            border-color: rgba(255, 0, 255, 0.25);
-            animation-delay: -3s;
-            transform: rotate(45deg);
-        }
-
-        .shape:nth-child(3) {
-            width: 40px;
-            height: 40px;
-            top: 40%;
-            left: 80%;
-            border-color: rgba(0, 255, 127, 0.3);
-            animation-delay: -2s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 20px;
-            position: relative;
+            padding: 0 24px;
         }
 
-        /* Glowing header */
+        /* Header */
         header {
+            background: var(--primary-bg);
+            border-bottom: 1px solid var(--border-light);
+            padding: 48px 0 64px;
+        }
+
+        .header-content {
             text-align: center;
-            margin-bottom: 60px;
-            padding: 60px 30px;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #00ffff, #ff00ff, #00ff7f, #00ffff);
-            border-radius: 15px;
-            z-index: -1;
-            animation: borderGlow 3s linear infinite;
-        }
-
-        @keyframes borderGlow {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
         }
 
         h1 {
-            font-size: 3.5em;
-            font-weight: 700;
-            margin-bottom: 15px;
-            background: linear-gradient(45deg, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
-            animation: textGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes textGlow {
-            from { filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.8)); }
-            to { filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.8)); }
+            font-size: 2.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .subtitle {
-            font-size: 1.3em;
-            color: #a0a6ff;
-            font-weight: 300;
-            letter-spacing: 2px;
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .glitch {
-            position: relative;
-            animation: glitch 4s infinite;
+        /* Navigation */
+        nav {
+            margin-top: 32px;
         }
 
-        @keyframes glitch {
-            0%, 90%, 100% { transform: translate(0); }
-            92% { transform: translate(-1px, 0); }
-            94% { transform: translate(1px, 0); }
-            96% { transform: translate(-1px, 0); }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
         }
 
-        /* Section styling */
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+        }
+
+        /* Main content */
+        main {
+            padding: 64px 0;
+        }
+
         .section {
             margin-bottom: 80px;
-            position: relative;
         }
 
         .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 40px;
-            padding: 20px;
-            background: rgba(0, 20, 40, 0.6);
-            border-left: 4px solid #00ffff;
-            border-radius: 8px;
-            backdrop-filter: blur(5px);
+            margin-bottom: 32px;
         }
 
         h2 {
-            color: #00ffff;
-            font-size: 2em;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-right: 20px;
+            font-size: 1.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        .section-line {
-            flex-grow: 1;
-            height: 2px;
-            background: linear-gradient(90deg, #00ffff, transparent);
+        .section-description {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 700px;
         }
 
-        /* Neon cards */
-        .links-grid {
+        /* Cards grid */
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
         }
 
-        .link-card {
-            background: rgba(10, 10, 25, 0.8);
-            border: 1px solid rgba(0, 255, 255, 0.3);
+        .card {
+            background: var(--primary-bg);
+            border: 1px solid var(--border-light);
             border-radius: 12px;
-            padding: 30px;
+            padding: 32px;
             text-decoration: none;
-            color: #e0e6ff;
-            transition: all 0.4s ease;
-            position: relative;
-            backdrop-filter: blur(10px);
-            overflow: hidden;
+            color: inherit;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
         }
 
-        .link-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-            transition: left 0.6s ease;
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-medium);
         }
 
-        .link-card:hover::before {
-            left: 100%;
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
         }
 
-        .link-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            border-color: #ff00ff;
-            box-shadow: 
-                0 10px 30px rgba(255, 0, 255, 0.3),
-                0 0 50px rgba(0, 255, 255, 0.2);
-            background: rgba(20, 10, 30, 0.9);
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+            flex-shrink: 0;
         }
 
-        .link-card h3 {
-            font-size: 1.4em;
-            margin-bottom: 15px;
-            color: #ffffff;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .card-icon.quiz { background: var(--accent-blue); }
+        .card-icon.article { background: var(--accent-green); }
+        .card-icon.project { background: #8b5cf6; }
+
+        .card-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            line-height: 1.4;
         }
 
-        .link-card p {
-            font-size: 0.95em;
-            color: #a0a6ff;
-            font-weight: 300;
+        .card-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
             line-height: 1.5;
         }
 
-        /* Add new sections */
-        .quizzes-section {
-            margin-bottom: 80px;
+        .card-meta {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
         }
 
-        .quiz-card {
-            background: rgba(25, 10, 40, 0.8);
-            border: 1px solid rgba(255, 0, 255, 0.4);
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
         }
 
-        .quiz-card:hover {
-            border-color: #00ff7f;
-            box-shadow: 
-                0 10px 30px rgba(0, 255, 127, 0.3),
-                0 0 50px rgba(255, 0, 255, 0.2);
+        .status-badge.active {
+            background: var(--accent-green-light);
+            color: var(--accent-green);
+        }
+
+        .status-badge.coming-soon {
+            background: var(--accent-bg);
+            color: var(--text-muted);
+        }
+
+        /* Featured content */
+        .featured-card {
+            background: linear-gradient(135deg, var(--accent-blue-light) 0%, var(--accent-green-light) 100%);
+            border: 1px solid var(--accent-blue);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--accent-blue);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
         }
 
         /* Footer */
         footer {
-            background: rgba(5, 5, 15, 0.9);
-            border-top: 2px solid rgba(0, 255, 255, 0.3);
-            color: #a0a6ff;
+            background: var(--secondary-bg);
+            border-top: 1px solid var(--border-light);
+            padding: 48px 0;
+            margin-top: 80px;
+        }
+
+        .footer-content {
             text-align: center;
-            padding: 30px;
-            font-size: 0.9em;
-            margin-top: 100px;
-            backdrop-filter: blur(10px);
+            color: var(--text-secondary);
         }
 
-        /* Scanline effect */
-        .scanlines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(0, 255, 255, 0.01) 2px,
-                rgba(0, 255, 255, 0.01) 4px
-            );
-            pointer-events: none;
-            z-index: 1000;
+        .footer-content p {
+            font-size: 0.95rem;
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Responsive */
+        /* Responsive design */
         @media (max-width: 768px) {
             .container {
-                padding: 15px;
+                padding: 0 20px;
             }
-            
-            header {
-                padding: 40px 20px;
-            }
-            
+
             h1 {
-                font-size: 2.5em;
+                font-size: 2.25rem;
             }
-            
-            .links-grid {
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                gap: 24px;
+            }
+
+            .cards-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
-            .link-card {
-                padding: 25px;
+
+            .card {
+                padding: 24px;
+            }
+
+            .section {
+                margin-bottom: 60px;
+            }
+
+            main {
+                padding: 48px 0;
+            }
+
+            header {
+                padding: 32px 0 48px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 12px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="scanlines"></div>
-    
-    <div class="bg-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-
     <div class="container">
         <header>
-            <h1 class="glitch">g0ridev</h1>
-            <p class="subtitle">[ DEBUGGING • C++ MASTERY • SYSTEM ANALYSIS ]</p>
+            <div class="header-content">
+                <h1>g0ridev</h1>
+                <p class="subtitle">
+                    Programming tutorials, algorithm analysis, and systems programming with a focus on practical C++ development and debugging techniques.
+                </p>
+                <nav>
+                    <div class="nav-links">
+                        <a href="#articles" class="nav-link">Articles</a>
+                        <a href="#projects" class="nav-link">Projects</a>
+                        <a href="#quizzes" class="nav-link">Quizzes</a>
+                        <a href="about.html" class="nav-link">About</a>
+                    </div>
+                </nav>
+            </div>
         </header>
         
         <main>
-            <section class="section quizzes-section">
+            <section class="section" id="quizzes">
                 <div class="section-header">
-                    <h2>// Quizzes</h2>
-                    <div class="section-line"></div>
+                    <h2>Interactive Quizzes</h2>
+                    <p class="section-description">
+                        Test your programming knowledge with interactive quizzes covering C++ fundamentals, debugging scenarios, and algorithm complexity.
+                    </p>
                 </div>
-                <div class="links-grid">
-                    <a href="quiz/cpp-theory/" class="link-card quiz-card">
-                        <h3>C++ Theory Quiz</h3>
-                        <p>Test your C++11 fundamentals with auto deduction, initializer lists, and reference collapsing challenges</p>
+                <div class="cards-grid">
+                    <a href="cpp-theory-quiz.html" class="card">
+                        <div class="card-header">
+                            <div class="card-icon quiz">Q</div>
+                            <div class="card-content">
+                                <h3>C++ Theory Quiz</h3>
+                                <p>Test your understanding of C++11 features, auto deduction, initializer lists, and advanced language mechanics.</p>
+                            </div>
+                        </div>
+                        <div class="card-meta">
+                            <span class="status-badge active">Active</span>
+                            <span>20 questions</span>
+                        </div>
                     </a>
-                    <a href="debug-challenges/" class="link-card quiz-card">
-                        <h3>Daily Debug Challenge</h3>
-                        <p>Fix broken code, sharpen your debugging skills. New challenge every day with real-world bugs</p>
+                    <a href="daily-quiz.html" class="card">
+                        <div class="card-header">
+                            <div class="card-icon quiz">D</div>
+                            <div class="card-content">
+                                <h3>Daily Debug Challenge</h3>
+                                <p>Daily debugging exercises with real-world code snippets. Fix bugs, identify issues, and improve your troubleshooting skills.</p>
+                            </div>
+                        </div>
+                        <div class="card-meta">
+                            <span class="status-badge active">Active</span>
+                            <span>Daily updates</span>
+                        </div>
                     </a>
                 </div>
             </section>
 
-            <section class="section">
+            <section class="section" id="articles">
                 <div class="section-header">
-                    <h2>// Articles</h2>
-                    <div class="section-line"></div>
+                    <h2>Technical Articles</h2>
+                    <p class="section-description">
+                        In-depth analysis of algorithms, data structures, and programming concepts with practical examples and performance considerations.
+                    </p>
                 </div>
-                <div class="links-grid">
-                    <a href="articles/leetcode-sucks/" class="link-card">
-                        <h3>LeetCode De-f**kified</h3>
-                        <p>Breaking down why coding interviews are broken and how to actually learn problem-solving skills</p>
+                <div class="cards-grid">
+                    <a href="articles/ds&a/binary-search.html" class="card featured-card">
+                        <div class="featured-badge">Featured</div>
+                        <div class="card-header">
+                            <div class="card-icon article">B</div>
+                            <div class="card-content">
+                                <h3>Binary Search Deep Dive</h3>
+                                <p>Complete analysis of binary search implementation, edge cases, variants, and performance characteristics with C++ examples.</p>
+                            </div>
+                        </div>
+                        <div class="card-meta">
+                            <span class="status-badge active">Published</span>
+                            <span>15 min read</span>
+                        </div>
                     </a>
-                    <a href="articles/professional-cpp/" class="link-card">
-                        <h3>Professional C++</h3>
-                        <p>Real-world C++ techniques, RAII patterns, and modern practices that actually matter in production</p>
+                    <a href="articles/leetcode-sucks/insertion-sort.html" class="card">
+                        <div class="card-header">
+                            <div class="card-icon article">I</div>
+                            <div class="card-content">
+                                <h3>Insertion Sort Analysis</h3>
+                                <p>Why insertion sort matters beyond coding interviews. Memory efficiency, adaptive behavior, and real-world applications.</p>
+                            </div>
+                        </div>
+                        <div class="card-meta">
+                            <span class="status-badge active">Published</span>
+                            <span>12 min read</span>
+                        </div>
                     </a>
-                    <a href="articles/debugging-mastery/" class="link-card">
-                        <h3>Debugging Mastery</h3>
-                        <p>Systematic approaches to tracking down bugs, reading stack traces, and understanding undefined behavior</p>
+                    <a href="articles/professional-cpp/" class="card">
+                        <div class="card-header">
+                            <div class="card-icon article">C</div>
+                            <div class="card-content">
+                                <h3>Professional C++ Techniques</h3>
+                                <p>Modern C++ practices, RAII patterns, smart pointers, and production-ready code techniques for professional development.</p>
+                            </div>
+                        </div>
+                        <div class="card-meta">
+                            <span class="status-badge coming-soon">In Progress</span>
+                            <span>Multiple articles</span>
+                        </div>
+                    </a>
+                    <a href="Debugging-tips.html" class="card">
+                        <div class="card-header">
+                            <div class="card-icon article">D</div>
+                            <div class="card-content">
+                                <h3>Debugging Mastery</h3>
+                                <p>Systematic debugging approaches, reading stack traces, memory debugging, and handling undefined behavior in C++.</p>
+                            </div>
+                        </div>
+                        <div class="card-meta">
+                            <span class="status-badge active">Published</span>
+                            <span>18 min read</span>
+                        </div>
                     </a>
                 </div>
             </section>
 
-            <section class="section">
+            <section class="section" id="projects">
                 <div class="section-header">
-                    <h2>// Projects</h2>
-                    <div class="section-line"></div>
+                    <h2>Code Projects</h2>
+                    <p class="section-description">
+                        Complete implementations with source code, testing frameworks, and detailed analysis of algorithms and data structures.
+                    </p>
                 </div>
-                <div class="links-grid">
-                    <a href="projects/insertion-sort/" class="link-card">
-                        <h3>Algorithm Analysis</h3>
-                        <p>Deep dive into sorting algorithms with performance analysis, memory usage, and optimization techniques</p>
+                <div class="cards-grid">
+                    <a href="projects/insertion-sort/" class="card">
+                        <div class="card-header">
+                            <div class="card-icon project">S</div>
+                            <div class="card-content">
+                                <h3>Sorting Algorithm Suite</h3>
+                                <p>Complete sorting algorithm implementations with performance benchmarks, memory analysis, and comprehensive test suites.</p>
+                            </div>
+                        </div>
+                        <div class="card-meta">
+                            <span class="status-badge active">Active</span>
+                            <span>C++, CMake</span>
+                        </div>
                     </a>
-                    <a href="projects/systems-programming/" class="link-card">
-                        <h3>Systems Programming</h3>
-                        <p>Low-level C++ projects: memory management, networking, and performance-critical applications</p>
+                    <a href="projects/two-sum/" class="card">
+                        <div class="card-header">
+                            <div class="card-icon project">T</div>
+                            <div class="card-content">
+                                <h3>Algorithm Problem Solutions</h3>
+                                <p>Optimized solutions to classic programming problems with multiple approaches, complexity analysis, and edge case handling.</p>
+                            </div>
+                        </div>
+                        <div class="card-meta">
+                            <span class="status-badge active">Active</span>
+                            <span>C++, Testing</span>
+                        </div>
                     </a>
-                    <a href="projects/debug-toolkit/" class="link-card">
-                        <h3>Debug Toolkit</h3>
-                        <p>Custom debugging utilities, memory leak detectors, and profiling tools for C++ development</p>
+                    <a href="storage/binary-search/" class="card">
+                        <div class="card-header">
+                            <div class="card-icon project">B</div>
+                            <div class="card-content">
+                                <h3>Binary Search Implementations</h3>
+                                <p>Multiple binary search variants with comprehensive testing, edge case coverage, and performance comparisons.</p>
+                            </div>
+                        </div>
+                        <div class="card-meta">
+                            <span class="status-badge active">Active</span>
+                            <span>C++, Unit Tests</span>
+                        </div>
+                    </a>
+                    <a href="articles/networking/tcp-server/" class="card">
+                        <div class="card-header">
+                            <div class="card-icon project">N</div>
+                            <div class="card-content">
+                                <h3>Network Programming</h3>
+                                <p>TCP server/client implementations demonstrating socket programming, concurrent connections, and protocol design.</p>
+                            </div>
+                        </div>
+                        <div class="card-meta">
+                            <span class="status-badge active">Published</span>
+                            <span>Python, Networking</span>
+                        </div>
                     </a>
                 </div>
             </section>
         </main>
 
         <footer>
-            <p>&copy; 2025 g0ridev • [ SYSTEM ONLINE ] • Built with HTML, CSS & caffeine</p>
+            <div class="footer-content">
+                <p>&copy; 2025 g0ridev • Programming tutorials and algorithm analysis</p>
+            </div>
         </footer>
     </div>
 </body>
