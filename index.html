@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>g0ridev - Programming Tutorials</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,168 +14,401 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'JetBrains Mono', monospace;
+            background: #0a0a0f;
+            color: #e0e6ff;
             line-height: 1.6;
-            color: #333;
-            background: #f8f9fa;
-            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated grid background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridPulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Floating geometric shapes */
+        .bg-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            left: 10%;
+            border-color: rgba(0, 255, 255, 0.3);
+            animation-delay: -1s;
+        }
+
+        .shape:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            top: 60%;
+            right: 15%;
+            border-color: rgba(255, 0, 255, 0.25);
+            animation-delay: -3s;
+            transform: rotate(45deg);
+        }
+
+        .shape:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            top: 40%;
+            left: 80%;
+            border-color: rgba(0, 255, 127, 0.3);
+            animation-delay: -2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            overflow: hidden;
+            padding: 20px;
+            position: relative;
         }
 
+        /* Glowing header */
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 30px;
             text-align: center;
+            margin-bottom: 60px;
+            padding: 60px 30px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #00ff7f, #00ffff);
+            border-radius: 15px;
+            z-index: -1;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
         h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 3.5em;
             font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.8)); }
+            to { filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.8)); }
         }
 
         .subtitle {
-            font-size: 1.2em;
-            opacity: 0.9;
+            font-size: 1.3em;
+            color: #a0a6ff;
+            font-weight: 300;
+            letter-spacing: 2px;
         }
 
-        main {
-            padding: 40px 30px;
+        .glitch {
+            position: relative;
+            animation: glitch 4s infinite;
         }
 
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-1px, 0); }
+            94% { transform: translate(1px, 0); }
+            96% { transform: translate(-1px, 0); }
+        }
+
+        /* Section styling */
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 80px;
+            position: relative;
         }
 
-        .section:last-child {
-            margin-bottom: 0;
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(0, 20, 40, 0.6);
+            border-left: 4px solid #00ffff;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
         }
 
         h2 {
-            color: #2c3e50;
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
-            display: inline-block;
+            color: #00ffff;
+            font-size: 2em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-right: 20px;
         }
 
+        .section-line {
+            flex-grow: 1;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, transparent);
+        }
+
+        /* Neon cards */
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .link-card {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 20px;
+            background: rgba(10, 10, 25, 0.8);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 30px;
             text-decoration: none;
-            color: #495057;
-            transition: all 0.3s ease;
-            display: block;
+            color: #e0e6ff;
+            transition: all 0.4s ease;
+            position: relative;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .link-card:hover::before {
+            left: 100%;
         }
 
         .link-card:hover {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transform: translateY(-5px) scale(1.02);
+            border-color: #ff00ff;
+            box-shadow: 
+                0 10px 30px rgba(255, 0, 255, 0.3),
+                0 0 50px rgba(0, 255, 255, 0.2);
+            background: rgba(20, 10, 30, 0.9);
         }
 
         .link-card h3 {
-            margin-bottom: 8px;
-            font-size: 1.2em;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #ffffff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .link-card p {
-            font-size: 0.9em;
-            opacity: 0.8;
-            margin: 0;
+            font-size: 0.95em;
+            color: #a0a6ff;
+            font-weight: 300;
+            line-height: 1.5;
         }
 
+        /* Add new sections */
+        .quizzes-section {
+            margin-bottom: 80px;
+        }
+
+        .quiz-card {
+            background: rgba(25, 10, 40, 0.8);
+            border: 1px solid rgba(255, 0, 255, 0.4);
+        }
+
+        .quiz-card:hover {
+            border-color: #00ff7f;
+            box-shadow: 
+                0 10px 30px rgba(0, 255, 127, 0.3),
+                0 0 50px rgba(255, 0, 255, 0.2);
+        }
+
+        /* Footer */
         footer {
-            background: #2c3e50;
-            color: white;
+            background: rgba(5, 5, 15, 0.9);
+            border-top: 2px solid rgba(0, 255, 255, 0.3);
+            color: #a0a6ff;
             text-align: center;
-            padding: 20px;
+            padding: 30px;
             font-size: 0.9em;
+            margin-top: 100px;
+            backdrop-filter: blur(10px);
         }
 
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
+        /* Scanline effect */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 255, 255, 0.01) 2px,
+                rgba(0, 255, 255, 0.01) 4px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
             }
             
             header {
-                padding: 30px 20px;
+                padding: 40px 20px;
             }
             
             h1 {
-                font-size: 2em;
-            }
-            
-            main {
-                padding: 30px 20px;
+                font-size: 2.5em;
             }
             
             .links-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .link-card {
+                padding: 25px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="scanlines"></div>
+    
+    <div class="bg-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
     <div class="container">
         <header>
-            <h1>g0ridev</h1>
-            <p class="subtitle">Programming Tutorials & Projects</p>
+            <h1 class="glitch">g0ridev</h1>
+            <p class="subtitle">[ DEBUGGING • C++ MASTERY • SYSTEM ANALYSIS ]</p>
         </header>
         
         <main>
-            <section class="section">
-                <h2>Articles</h2>
+            <section class="section quizzes-section">
+                <div class="section-header">
+                    <h2>// Quizzes</h2>
+                    <div class="section-line"></div>
+                </div>
                 <div class="links-grid">
-                    <a href="articles/leetcode-sucks/" class="link-card">
-                        <h3>LeetCode Sucks</h3>
-                        <p>My thoughts on the problems with coding interview culture</p>
+                    <a href="quiz/cpp-theory/" class="link-card quiz-card">
+                        <h3>C++ Theory Quiz</h3>
+                        <p>Test your C++11 fundamentals with auto deduction, initializer lists, and reference collapsing challenges</p>
                     </a>
-                    <a href="articles/professional-cpp/" class="link-card">
-                        <h3>Professional C++</h3>
-                        <p>Best practices and techniques for real-world C++ development</p>
+                    <a href="debug-challenges/" class="link-card quiz-card">
+                        <h3>Daily Debug Challenge</h3>
+                        <p>Fix broken code, sharpen your debugging skills. New challenge every day with real-world bugs</p>
                     </a>
                 </div>
             </section>
 
             <section class="section">
-                <h2>Projects</h2>
+                <div class="section-header">
+                    <h2>// Articles</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="links-grid">
+                    <a href="articles/leetcode-sucks/" class="link-card">
+                        <h3>LeetCode De-f**kified</h3>
+                        <p>Breaking down why coding interviews are broken and how to actually learn problem-solving skills</p>
+                    </a>
+                    <a href="articles/professional-cpp/" class="link-card">
+                        <h3>Professional C++</h3>
+                        <p>Real-world C++ techniques, RAII patterns, and modern practices that actually matter in production</p>
+                    </a>
+                    <a href="articles/debugging-mastery/" class="link-card">
+                        <h3>Debugging Mastery</h3>
+                        <p>Systematic approaches to tracking down bugs, reading stack traces, and understanding undefined behavior</p>
+                    </a>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-header">
+                    <h2>// Projects</h2>
+                    <div class="section-line"></div>
+                </div>
                 <div class="links-grid">
                     <a href="projects/insertion-sort/" class="link-card">
-                        <h3>Insertion Sort</h3>
-                        <p>Implementation and analysis of the insertion sort algorithm</p>
+                        <h3>Algorithm Analysis</h3>
+                        <p>Deep dive into sorting algorithms with performance analysis, memory usage, and optimization techniques</p>
                     </a>
-                    <a href="projects/two-sum/" class="link-card">
-                        <h3>Two Sum</h3>
-                        <p>Classic array problem with multiple solution approaches</p>
+                    <a href="projects/systems-programming/" class="link-card">
+                        <h3>Systems Programming</h3>
+                        <p>Low-level C++ projects: memory management, networking, and performance-critical applications</p>
+                    </a>
+                    <a href="projects/debug-toolkit/" class="link-card">
+                        <h3>Debug Toolkit</h3>
+                        <p>Custom debugging utilities, memory leak detectors, and profiling tools for C++ development</p>
                     </a>
                 </div>
             </section>
         </main>
 
         <footer>
-            <p>&copy; 2025 g0ridev. Built with HTML & CSS.</p>
+            <p>&copy; 2025 g0ridev • [ SYSTEM ONLINE ] • Built with HTML, CSS & caffeine</p>
         </footer>
     </div>
 </body>

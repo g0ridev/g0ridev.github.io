@@ -1,0 +1,158 @@
+[
+  {
+    "difficulty": "medium",
+    "question": "What will this code print?",
+    "code": "#include <iostream>\nint main() {\n    auto x = {5};\n    std::cout << x.size() << '\\n';\n}",
+    "options": [
+      "prints 0",
+      "prints 1",
+      "compile error (no member size)",
+      "prints 5"
+    ],
+    "correct": 1,
+    "explanation": "In C++11 auto x = {5}; deduces std::initializer_list<int>, which has .size() == 1."
+  },
+  {
+    "difficulty": "hard",
+    "question": "What will this code print?",
+    "code": "#include <iostream>\nint main() {\n    auto x{5};                 // note: braced-init without '='\n    std::cout << (x.begin(), 42) << '\\n';\n}",
+    "options": [
+      "prints 42",
+      "prints address of x.begin()",
+      "compile error on x.begin()",
+      "runtime crash"
+    ],
+    "correct": 0,
+    "explanation": "auto x{5}; in C++11 deduces std::initializer_list<int> (so x.begin() is valid). The comma operator (x.begin(), 42) yields 42."
+  },
+  {
+    "difficulty": "easy",
+    "question": "What will this code print?",
+    "code": "#include <iostream>\nint main() {\n    const int a = 10;\n    auto b = a;\n    b = 20;\n    std::cout << a << ' ' << b << '\\n';\n}",
+    "options": [
+      "10 20",
+      "20 20",
+      "compile error (assignment to b)",
+      "10 10"
+    ],
+    "correct": 0,
+    "explanation": "auto drops top-level const. b is int, not const int, so changing b doesn't change a."
+  },
+  {
+    "difficulty": "medium",
+    "question": "What will this code print?",
+    "code": "#include <iostream>\nint main() {\n    int i = 0;\n    auto &r = i;\n    r = 5;\n    std::cout << i << '\\n';\n}",
+    "options": [
+      "prints 0",
+      "prints 5",
+      "compile error (reference to non-const)",
+      "undefined behavior"
+    ],
+    "correct": 1,
+    "explanation": "auto& deduces int& for an lvalue i. r aliases i, so changing r changes i."
+  },
+  {
+    "difficulty": "medium",
+    "question": "What happens with this code?",
+    "code": "#include <iostream>\nint main() {\n    const int ci = 1;\n    auto &r = ci;\n    r = 3;\n}",
+    "options": [
+      "compiles and runs, ci becomes 3",
+      "compile error on declaration auto &r = ci;",
+      "compiles, but error when assigning r = 3;",
+      "undefined behavior at runtime"
+    ],
+    "correct": 2,
+    "explanation": "auto& r = ci; deduces const int& (reference preserves constness). The declaration is fine; r = 3; fails — you cannot assign through a const reference."
+  },
+  {
+    "difficulty": "easy",
+    "question": "What will this code print on typical platforms?",
+    "code": "#include <iostream>\nint main() {\n    auto x = 1.0f;\n    auto y = 1.0;\n    std::cout << sizeof(x) << ' ' << sizeof(y) << '\\n';\n}",
+    "options": [
+      "8 8",
+      "4 8",
+      "8 4",
+      "compile error (ambiguous)"
+    ],
+    "correct": 1,
+    "explanation": "1.0f is float (4 bytes), 1.0 is double (8 bytes). auto preserves literal type."
+  },
+  {
+    "difficulty": "easy",
+    "question": "What will this code print?",
+    "code": "#include <iostream>\nint main() {\n    auto v = {1, 2};\n    std::cout << v.size() << '\\n';\n}",
+    "options": [
+      "prints 0",
+      "prints 1", 
+      "prints 2",
+      "compile error"
+    ],
+    "correct": 2,
+    "explanation": "auto v = {1,2}; → std::initializer_list<int> containing 2 elements."
+  },
+  {
+    "difficulty": "medium",
+    "question": "What will this code print?",
+    "code": "#include <iostream>\nint main() {\n    auto x = 5u;   // unsigned\n    auto y = -1;   // (signed) int\n    auto z = x + y;\n    std::cout << z << '\\n';\n}",
+    "options": [
+      "prints 4",
+      "prints a negative value",
+      "prints a large unsigned value (wrap)",
+      "compile error"
+    ],
+    "correct": 2,
+    "explanation": "Mixed signed/unsigned arithmetic converts the signed operand to unsigned; -1 becomes a large unsigned value, so the result is a large unsigned integer."
+  },
+  {
+    "difficulty": "hard",
+    "question": "What will this code print?",
+    "code": "#include <iostream>\nint main() {\n    int i = 0;\n    auto&& r = i;\n    r = 42;\n    std::cout << i << '\\n';\n}",
+    "options": [
+      "prints 0",
+      "prints 42",
+      "compile error (rvalue reference can't bind)",
+      "undefined behavior"
+    ],
+    "correct": 1,
+    "explanation": "auto&& with an lvalue i deduces int& (reference collapsing), so r is an lvalue reference to i."
+  },
+  {
+    "difficulty": "hard",
+    "question": "What will this code print?",
+    "code": "#include <iostream>\n#include <initializer_list>\n\nvoid f(std::initializer_list<int>) { std::cout << \"ilist\\n\"; }\nvoid f(int)                        { std::cout << \"int\\n\"; }\n\nint main() {\n    f({5});\n}",
+    "options": [
+      "prints int",
+      "prints ilist",
+      "compile error (ambiguous overload)",
+      "no output"
+    ],
+    "correct": 1,
+    "explanation": "The braced {5} matches initializer_list<int> overload in preference to the int overload."
+  },
+  {
+    "difficulty": "medium",
+    "question": "What will this code print?",
+    "code": "#include <iostream>\n#include <type_traits>\n\nint main() {\n    auto s = \"hello\";\n    std::cout << std::is_same<decltype(s), const char*>::value << '\\n';\n}",
+    "options": [
+      "prints 1",
+      "prints 0",
+      "compile error",
+      "prints hello"
+    ],
+    "correct": 0,
+    "explanation": "String literal type decays to const char*; auto s = \"hello\"; deduces const char*."
+  },
+  {
+    "difficulty": "hard",
+    "question": "What happens with this code?",
+    "code": "#include <iostream>\n\nint main() {\n    const int a = 3;\n    auto&& r = a;\n    r = 4;\n    std::cout << a << '\\n';\n}",
+    "options": [
+      "prints 3",
+      "prints 4",
+      "compile error on r = 4;",
+      "undefined behavior"
+    ],
+    "correct": 2,
+    "explanation": "auto&& with an lvalue const int deduces const int&. r is const int&, so assignment through r is not allowed."
+  }
+]

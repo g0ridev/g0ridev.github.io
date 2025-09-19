@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search by Hand: Learning Code Through Layers of Thinking</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        
+        code {
+            background-color: #f1f3f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+        
+        .step-image {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .debug-explanation {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .insight {
+            background-color: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        .checklist {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .sources {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .sources a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .sources a:hover {
+            text-decoration: underline;
+        }
+        
+        strong {
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <h1>Binary Search by Hand: Learning Code Through Layers of Thinking</h1>
+
+    <h2>Introduction: Why Process Matters</h2>
+    
+    <p>Most programming tutorials show you <strong>what</strong> the solution looks like, but not <strong>how</strong> to engrain the knowledge. They skip foundational steps like proving logic by hand or debugging through robust tests, creating what I call the "math translated to Spanish" problem—programming requires knowledge from multiple fields that tutorials mash together overwhelming.</p>
+    
+    <p>The systematic approach you apply to programming problems is the difference between you as a beginner and an expert. In this article, I'll walk you through my 6-layer framework for approaching any algorithm systematically.</p>
+
+    <h2>The Problem: Find a Number in a Sorted Array</h2>
+    
+    <p>Apply binary search to find a target value in a sorted array <code>{1,2,3,4,5,6,7,8,9,10}</code>. Return the index if found, or -1 if not found.</p>
+    
+    <p>Why not just google the solution? Every copy-pasted line of code is a wasted opportunity to expand your syntax knowledge. We're building a reusable system for approaching algorithms, not just solving this one problem.</p>
+
+    <h2>Step 1: Draw It Out (Logic Layer)</h2>
+    
+    <p>Before touching code, understand the problem with concrete examples. Here's my hand-traced work finding the number 7:</p>
+    
+    <div class="step-image">
+        <img src="images\handwritten-logic.png" alt="Hand-drawn proof showing the binary search process" style="max-width: 100%; height: auto;">
+        <p><em>Hand-drawn proof of binary search process</em></p>
+    </div>
+    
+    <p><strong>Initial state:</strong></p>
+    <pre>
+Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Target: 7
+left = 0, right = 9
+    </pre>
+    
+    <p><strong>Step 1 - First split:</strong></p>
+    <pre>
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+ ^           ^              ^
+left       mid(4)         right
+    </pre>
+    <p>• Mid value is 5, target 7 > 5, search right half<br>
+    • Update: left = 5</p>
+    
+    <p><strong>Step 2 - Search right half:</strong></p>
+    <pre>
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+              ^     ^        ^
+            left   mid(7)  right
+    </pre>
+    <p>• Mid value is 8, target 7 < 8, search left half<br>
+    • Update: right = 6</p>
+    
+    <p><strong>Step 3 & 4 - Found it:</strong><br>
+    After narrowing down, we find 7 at index 6.</p>
+    
+    <div class="insight">
+        <strong>Key insight:</strong> We're repeatedly cutting the search space in half until we find the target or exhaust possibilities.
+    </div>
+
+    <h2>Step 2: Pseudocode (Abstraction Layer)</h2>
+    
+    <div class="step-image">
+        <img src="images\handwritten-pseudocode.png" alt="Hand-written pseudocode" style="max-width: 100%; height: auto;">
+        <p><em>Hand-written pseudocode abstraction</em></p>
+    </div>
+    
+    <p>Language-agnostic solution that engrains templates and abstractions:</p>
+    
+    <pre>
+BINARY_SEARCH(array, target):
+    set left to 0
+    set right to (array size - 1)
+    
+    while left <= right:
+        set middle to left + (right - left)/2
+        
+        if middle value equals target:
+            return middle index
+        if middle value < target:
+            set left to middle + 1
+        else:
+            set right to middle - 1
+    
+    return -1  // not found
+    </pre>
+    
+    <p>This focuses purely on logic without syntax distractions—translation becomes easier with solid pseudocode.</p>
+
+    <h2>Step 3: Translate to C++ (Syntax Layer)</h2>
+    
+    <p>Now handle language-specific details:</p>
+    
+    <pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int binarysearch(vector&lt;int&gt; arr, int k) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while(left &lt;= right) {
+        int mid = left + (right - left)/2;
+        if(arr[mid] == k) {
+            return mid;
+        }
+        if(arr[mid] &lt; k) {
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}
+
+int main() {
+    vector&lt;int&gt; arr = {1,2,3,4,5,6,7,8,9,10};
+    int key = 11;
+    int result = binarysearch(arr, key);
+    
+    // This compiles but needs tests
+}</code></pre>
+    
+    <p><strong>Translation decisions:</strong></p>
+    <ul>
+        <li><code>#include &lt;vector&gt;</code> for <code>.size()</code> method</li>
+        <li><code>vector&lt;int&gt;</code> instead of C-style arrays for easier size handling</li>
+        <li><code>left + (right - left)/2</code> prevents integer overflow</li>
+        <li><code>arr[mid]</code> uses square bracket notation for element access</li>
+    </ul>
+    
+    <p>The solution works but needs debugging output to make the data flow visible.</p>
+
+    <h2>Step 5: Debug & Visualize (Debugging Layer)</h2>
+    
+    <p>Add debug prints to make the algorithm's internal process visible:</p>
+    
+    <pre><code>int binarysearch(vector&lt;int&gt; arr, int k) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while(left &lt;= right) {
+        int mid = left + (right - left)/2;
+        if(arr[mid] == k) {
+            std::cout &lt;&lt; " mid value matches k at idx: " &lt;&lt; mid &lt;&lt; " with mid value: "&lt;&lt; arr[mid] &lt;&lt; std::endl;
+            return mid;
+        }
+        if(arr[mid] &lt; k) {
+            std::cout &lt;&lt; " mid value &lt; k value at idx: " &lt;&lt; mid &lt;&lt; " with mid value: "&lt;&lt; arr[mid] &lt;&lt; std::endl;
+            left = mid + 1;
+            std::cout &lt;&lt; " left idx now: " &lt;&lt; left&lt;&lt; ", left value: "&lt;&lt; left &lt;&lt; std::endl;
+        }
+        else {
+            std::cout &lt;&lt; " mid value &gt; k value at idx: " &lt;&lt; mid &lt;&lt; " with mid value: "&lt;&lt; arr[mid] &lt;&lt; std::endl;
+            right = mid - 1;
+            std::cout &lt;&lt; " right idx now: " &lt;&lt; right&lt;&lt; ", right value: "&lt;&lt; right &lt;&lt; std::endl;
+        }
+    }
+    return -1;
+}
+
+int main() {
+    // Case: matching value exists
+    vector&lt;int&gt; arr = {1,2,3,4,5,6,7,8,9,10};
+    int key = 5;
+    int result = binarysearch(arr, key);
+
+    std::cout &lt;&lt; "key was "&lt;&lt; key&lt;&lt; ", and found idx of matching value found in array: " &lt;&lt; result &lt;&lt; std::endl;
+    
+    // Case: no matching value
+    if(result == -1) {
+        std::cout &lt;&lt; "no matching value.";
+    }
+}</code></pre>
+    
+    <div class="debug-explanation">
+        <strong>What each debug line reveals:</strong>
+        <ol>
+            <li><strong>"mid value matches k at idx: X with mid value: Y"</strong> - Shows when we've found the target and at which index</li>
+            <li><strong>"mid value < k value at idx: X with mid value: Y"</strong> - Shows when current middle is too small, so we need to search the right half</li>
+            <li><strong>"left idx now: X, left value: X"</strong> - Shows the new left boundary after moving right</li>
+            <li><strong>"mid value > k value at idx: X with mid value: Y"</strong> - Shows when current middle is too large, so we need to search the left half</li>
+            <li><strong>"right idx now: X, right value: X"</strong> - Shows the new right boundary after moving left</li>
+        </ol>
+    </div>
+    
+    <p><strong>Sample output when searching for 5:</strong></p>
+    <pre>
+mid value < k value at idx: 4 with mid value: 5
+left idx now: 5, left value: 5
+mid value matches k at idx: 4 with mid value: 5
+key was 5, and found idx of matching value found in array: 4
+    </pre>
+    
+    <p>This makes the search process transparent—you can see exactly how the boundaries move and when the target is found.</p>
+
+    <h2>Step 7: Feedback Loop (Learning Layer)</h2>
+    
+    <p>Getting stuck is part of the process. It's okay to consult cppreference.com for syntax or ask AI specific questions, but every line you copy-paste is a wasted learning opportunity. Use external help to understand concepts, then implement yourself.</p>
+    
+    <p>Have strategies for different types of confusion: add more debug prints for logic issues, test with simpler inputs when overwhelmed, and verify assumptions about language features when syntax breaks.</p>
+
+    <h2>Conclusion: Try It Yourself</h2>
+    
+    <p>This layered approach scales to any algorithm—recursion, sorting, graph traversal. Try each section separately on a new problem like linear search. Even if you struggle with one layer, you'll know exactly where you need improvement.</p>
+    
+    <p>Some people know binary search but can't debug it effectively. Others debug well but don't remember the core algorithm. This systematic approach reveals which skills need strengthening and builds a reusable framework for tackling any programming problem.</p>
+
+    <div class="sources">
+        <h3>Sources:</h3>
+        <p>
+            <a href="https://www.geeksforgeeks.org/dsa/binary-search/" target="_blank">GeeksforGeeks - Binary Search</a><br>
+            <a href="https://www.geeksforgeeks.org/dsa/complexity-analysis-of-binary-search/" target="_blank">GeeksforGeeks - Complexity Analysis of Binary Search</a>
+        </p>
+    </div>
+
+</body>
+</html>

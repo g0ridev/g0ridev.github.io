@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Debug Quiz - g0ridev</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            background: #0d1117;
+            color: #c9d1d9;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #f92672, #fd971f);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(249, 38, 114, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .quiz-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #30363d;
+        }
+
+        .day-number {
+            background: #f92672;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .date-info {
+            color: #7d8590;
+            font-size: 0.9em;
+        }
+
+        .question-title {
+            color: #58a6ff;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .question-desc {
+            color: #c9d1d9;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        .files-section {
+            background: #0d1117;
+            border: 1px solid #21262d;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .files-title {
+            color: #fd971f;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .file-link {
+            display: inline-block;
+            background: #238636;
+            color: white;
+            padding: 8px 16px;
+            margin: 5px 10px 5px 0;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .file-link:hover {
+            background: #2ea043;
+            transform: translateY(-1px);
+        }
+
+        .answer-section {
+            background: #21262d;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+
+        .answer-label {
+            color: #f0f6fc;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .answer-input {
+            width: 100%;
+            padding: 12px;
+            background: #0d1117;
+            border: 2px solid #30363d;
+            border-radius: 6px;
+            color: #c9d1d9;
+            font-family: inherit;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: #58a6ff;
+        }
+
+        .submit-btn {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #2ea043;
+            transform: translateY(-1px);
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .result.correct {
+            background: #238636;
+            color: white;
+        }
+
+        .result.incorrect {
+            background: #da3633;
+            color: white;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #58a6ff;
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            color: #7d8590;
+            margin-top: 5px;
+        }
+
+        .next-challenge {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .day-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Daily Debug Quiz</h1>
+            <p class="subtitle">Debug C++ code, sharpen your skills</p>
+        </header>
+
+        <div class="quiz-card">
+            <div class="day-header">
+                <div class="day-number" id="dayNumber">Day ???</div>
+                <div class="date-info" id="dateInfo">Loading...</div>
+            </div>
+
+            <div id="questionContent">
+                <div class="question-title" id="questionTitle">Loading today's challenge...</div>
+                <div class="question-desc" id="questionDesc"></div>
+                
+                <div class="files-section">
+                    <div class="files-title">📁 Challenge Files:</div>
+                    <div id="fileLinks"></div>
+                </div>
+
+                <div class="answer-section">
+                    <div class="answer-label">Enter the checksum from the challenge test:</div>
+                    <input type="text" class="answer-input" id="answerInput" placeholder="Enter your answer here...">
+                    <button class="submit-btn" onclick="checkAnswer()">Submit Answer</button>
+                    <div id="result"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalSolved">0</div>
+                <div class="stat-label">Solved</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="currentStreak">0</div>
+                <div class="stat-label">Streak</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="accuracy">0%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+        </div>
+
+        <div class="next-challenge" id="nextChallenge" style="display: none;">
+            <h3>🎉 Challenge Complete!</h3>
+            <p>Come back tomorrow for the next debugging challenge!</p>
+            <p style="margin-top: 10px; color: #7d8590;">Next challenge available at midnight UTC</p>
+        </div>
+    </div>
+
+    <script>
+        // Challenge database - expand this with more challenges
+        const challenges = [
+            {
+                title: "Broken Insertion Sort",
+                description: "Your teammate left some buggy insertion sort code. The algorithm has two critical bugs that cause incorrect sorting behavior. Fix the implementation and run the test suite to get the challenge checksum.",
+                files: [
+                    { name: "insertion_sort.h", url: "challenges/day1/insertion_sort.h" },
+                    { name: "insertion_sort.cpp", url: "challenges/day1/insertion_sort.cpp" },
+                    { name: "test.cpp", url: "challenges/day1/test.cpp" }
+                ],
+                answer: "185250" // This would be the actual checksum from the corrected code
+            },
+            {
+                title: "Vector Memory Bug",
+                description: "A vector manipulation function is causing memory issues and producing wrong results. Debug the code and find the checksum from the large test case.",
+                files: [
+                    { name: "vector_ops.h", url: "challenges/day2/vector_ops.h" },
+                    { name: "vector_ops.cpp", url: "challenges/day2/vector_ops.cpp" },
+                    { name: "test.cpp", url: "challenges/day2/test.cpp" }
+                ],
+                answer: "294751"
+            },
+            {
+                title: "Pointer Arithmetic Gone Wrong",
+                description: "Classic C++ pointer mistakes are lurking in this array processing code. Track down the bugs and calculate the final checksum.",
+                files: [
+                    { name: "array_utils.h", url: "challenges/day3/array_utils.h" },
+                    { name: "array_utils.cpp", url: "challenges/day3/array_utils.cpp" },
+                    { name: "test.cpp", url: "challenges/day3/test.cpp" }
+                ],
+                answer: "156824"
+            }
+        ];
+
+        function getDaysSinceEpoch() {
+            const startDate = new Date('2025-01-01'); // Start date for challenges
+            const today = new Date();
+            const diffTime = today - startDate;
+            return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        }
+
+        function loadTodaysChallenge() {
+            const dayIndex = getDaysSinceEpoch() % challenges.length;
+            const challenge = challenges[dayIndex];
+            const dayNumber = getDaysSinceEpoch() + 1;
+
+            document.getElementById('dayNumber').textContent = `Day ${dayNumber}`;
+            document.getElementById('dateInfo').textContent = new Date().toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            document.getElementById('questionTitle').textContent = challenge.title;
+            document.getElementById('questionDesc').textContent = challenge.description;
+
+            // Generate file links
+            const fileLinksHtml = challenge.files.map(file => 
+                `<a href="${file.url}" class="file-link" target="_blank">${file.name}</a>`
+            ).join('');
+            document.getElementById('fileLinks').innerHTML = fileLinksHtml;
+
+            // Store today's answer
+            window.todaysAnswer = challenge.answer;
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById('answerInput').value.trim();
+            const resultDiv = document.getElementById('result');
+            
+            if (!userAnswer) {
+                resultDiv.innerHTML = '<div class="result incorrect">Please enter an answer</div>';
+                return;
+            }
+
+            if (userAnswer === window.todaysAnswer) {
+                resultDiv.innerHTML = '<div class="result correct">🎉 Correct! Great debugging skills!</div>';
+                updateStats(true);
+                document.getElementById('nextChallenge').style.display = 'block';
+            } else {
+                resultDiv.innerHTML = '<div class="result incorrect">❌ Incorrect. Double-check your fix and try again.</div>';
+                updateStats(false);
+            }
+        }
+
+        function updateStats(correct) {
+            let stats = JSON.parse(localStorage.getItem('debugQuizStats') || '{"solved": 0, "attempts": 0, "streak": 0, "lastSolvedDay": -1}');
+            
+            const currentDay = getDaysSinceEpoch();
+            stats.attempts++;
+            
+            if (correct) {
+                if (stats.lastSolvedDay !== currentDay) {
+                    stats.solved++;
+                    if (stats.lastSolvedDay === currentDay - 1) {
+                        stats.streak++;
+                    } else {
+                        stats.streak = 1;
+                    }
+                    stats.lastSolvedDay = currentDay;
+                }
+            } else {
+                if (stats.lastSolvedDay !== currentDay - 1) {
+                    stats.streak = 0;
+                }
+            }
+
+            localStorage.setItem('debugQuizStats', JSON.stringify(stats));
+            displayStats();
+        }
+
+        function displayStats() {
+            const stats = JSON.parse(localStorage.getItem('debugQuizStats') || '{"solved": 0, "attempts": 0, "streak": 0}');
+            
+            document.getElementById('totalSolved').textContent = stats.solved;
+            document.getElementById('currentStreak').textContent = stats.streak;
+            
+            const accuracy = stats.attempts > 0 ? Math.round((stats.solved / stats.attempts) * 100) : 0;
+            document.getElementById('accuracy').textContent = accuracy + '%';
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('answerInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        // Initialize on page load
+        loadTodaysChallenge();
+        displayStats();
+    </script>
+</body>
+</html>

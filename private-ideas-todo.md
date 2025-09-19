@@ -1,10 +1,25 @@
 todo:
-- networking articles projects section (1hr)
+- strudel session 30m
+- workout 10m
+-  clean room 30m
 
-- 3333 articles projects seciton (1hr)
-- stupid site wont fix (10m)
-- buy registration plate (10m) do it laeter need brown + nitro x
-- get event calendar mom (10m)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

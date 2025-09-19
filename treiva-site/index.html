@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treiva - Deep Reading Through Quizzes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background-color: #fefefe;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            padding: 48px 0 32px;
+            border-bottom: 1px solid #e8e8e8;
+            margin-bottom: 48px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .logo h1 {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 2.2rem;
+            font-weight: normal;
+            color: #2c3e50;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+        
+        .nav-links a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+        
+        .nav-links a:hover {
+            border-bottom-color: #3498db;
+        }
+        
+        .tagline {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 1.1rem;
+            color: #5a5a5a;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        /* Main Content */
+        .intro {
+            text-align: center;
+            margin-bottom: 64px;
+            padding: 0 48px;
+        }
+        
+        .intro h2 {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+            font-weight: normal;
+            color: #2c3e50;
+        }
+        
+        .intro p {
+            font-size: 1.05rem;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Featured Book */
+        .featured-section {
+            margin-bottom: 64px;
+        }
+        
+        .section-title {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 1.4rem;
+            margin-bottom: 24px;
+            color: #2c3e50;
+            font-weight: normal;
+            text-align: center;
+        }
+        
+        .featured-book {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 2px;
+            padding: 32px;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .book-cover {
+            width: 120px;
+            height: 160px;
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            margin: 0 auto 20px;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: Georgia, serif;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.3;
+        }
+        
+        .featured-book h3 {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: normal;
+        }
+        
+        .featured-book .author {
+            color: #666;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+        
+        .featured-book .synopsis {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .quiz-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 0.95rem;
+            border-radius: 2px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+        }
+        
+        .quiz-button:hover {
+            background: #2980b9;
+        }
+        
+        /* Book Grid */
+        .books-section {
+            margin-bottom: 64px;
+        }
+        
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+        
+        .book-card {
+            background: white;
+            border: 1px solid #e8e8e8;
+            border-radius: 2px;
+            padding: 24px;
+            transition: border-color 0.2s ease;
+            text-align: center;
+        }
+        
+        .book-card:hover {
+            border-color: #3498db;
+        }
+        
+        .book-card .book-cover {
+            width: 80px;
+            height: 108px;
+            margin: 0 auto 16px;
+            font-size: 12px;
+        }
+        
+        .book-card h4 {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            color: #2c3e50;
+            font-weight: normal;
+        }
+        
+        .book-card .author {
+            color: #666;
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+        
+        .book-card .quiz-button {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid #e8e8e8;
+            padding: 32px 0;
+            margin-top: 64px;
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .intro {
+                padding: 0;
+            }
+            
+            .featured-book {
+                padding: 24px;
+            }
+            
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <div class="logo">
+                    <h1>Treiva</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#books">Books</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+            <div class="tagline">
+                Deep Reading Through Quizzes
+            </div>
+        </header>
+        
+        <main>
+            <section class="intro">
+                <h2>Read. Quiz. Understand.</h2>
+                <p>Test your comprehension and deepen your understanding of great books through thoughtful quizzes designed to reveal the layers beneath the surface.</p>
+            </section>
+            
+            <section class="featured-section">
+                <h3 class="section-title">Featured This Week</h3>
+                <div class="featured-book">
+                    <div class="book-cover">
+                        The Great<br>Gatsby
+                    </div>
+                    <h3>The Great Gatsby</h3>
+                    <div class="author">by F. Scott Fitzgerald</div>
+                    <p class="synopsis">
+                        Explore the American Dream through Nick Carraway's eyes as he witnesses the tragic story of Jay Gatsby and his obsession with Daisy Buchanan in Jazz Age New York.
+                    </p>
+                    <button class="quiz-button">Begin Reading Quiz</button>
+                </div>
+            </section>
+            
+            <section class="books-section">
+                <h3 class="section-title">Available Books</h3>
+                <div class="books-grid">
+                    <div class="book-card">
+                        <div class="book-cover" style="background: linear-gradient(145deg, #e74c3c, #c0392b);">
+                            To Kill a<br>Mockingbird
+                        </div>
+                        <h4>To Kill a Mockingbird</h4>
+                        <div class="author">by Harper Lee</div>
+                        <button class="quiz-button">Start Quiz</button>
+                    </div>
+                    
+                    <div class="book-card">
+                        <div class="book-cover" style="background: linear-gradient(145deg, #27ae60, #229954);">
+                            1984
+                        </div>
+                        <h4>1984</h4>
+                        <div class="author">by George Orwell</div>
+                        <button class="quiz-button">Start Quiz</button>
+                    </div>
+                    
+                    <div class="book-card">
+                        <div class="book-cover" style="background: linear-gradient(145deg, #f39c12, #e67e22);">
+                            Pride and<br>Prejudice
+                        </div>
+                        <h4>Pride and Prejudice</h4>
+                        <div class="author">by Jane Austen</div>
+                        <button class="quiz-button">Start Quiz</button>
+                    </div>
+                    
+                    <div class="book-card">
+                        <div class="book-cover" style="background: linear-gradient(145deg, #9b59b6, #8e44ad);">
+                            The Catcher<br>in the Rye
+                        </div>
+                        <h4>The Catcher in the Rye</h4>
+                        <div class="author">by J.D. Salinger</div>
+                        <button class="quiz-button">Start Quiz</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Treiva &copy; 2025 - Thoughtful reading, deeper understanding</p>
+        </footer>
+    </div>
+</body>
+</html>
