@@ -13,29 +13,10 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-bg: #ffffff;
-            --secondary-bg: #f8fafc;
-            --accent-bg: #f1f5f9;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --border-light: #e2e8f0;
-            --border-medium: #cbd5e1;
-            --accent-blue: #3b82f6;
-            --accent-blue-light: #dbeafe;
-            --accent-green: #10b981;
-            --accent-green-light: #d1fae5;
-            --code-bg: #f8fafc;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--primary-bg);
-            color: var(--text-primary);
+            background: #ffffff;
+            color: #1e293b;
             line-height: 1.6;
         }
 
@@ -45,34 +26,27 @@
             padding: 0 24px;
         }
 
-        /* Header */
         header {
-            background: var(--primary-bg);
-            border-bottom: 1px solid var(--border-light);
             padding: 48px 0 64px;
-        }
-
-        .header-content {
             text-align: center;
         }
 
         h1 {
             font-size: 2.75rem;
             font-weight: 600;
-            color: var(--text-primary);
+            color: #1e293b;
             margin-bottom: 12px;
             font-family: 'JetBrains Mono', monospace;
         }
 
         .subtitle {
             font-size: 1.125rem;
-            color: var(--text-secondary);
+            color: #64748b;
             font-weight: 400;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* Navigation */
         nav {
             margin-top: 32px;
         }
@@ -85,20 +59,12 @@
         }
 
         .nav-link {
-            color: var(--text-secondary);
+            color: #64748b;
             text-decoration: none;
             font-weight: 500;
             padding: 8px 0;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s ease;
         }
 
-        .nav-link:hover {
-            color: var(--accent-blue);
-            border-bottom-color: var(--accent-blue);
-        }
-
-        /* Main content */
         main {
             padding: 64px 0;
         }
@@ -114,18 +80,17 @@
         h2 {
             font-size: 1.875rem;
             font-weight: 600;
-            color: var(--text-primary);
+            color: #1e293b;
             margin-bottom: 8px;
             font-family: 'JetBrains Mono', monospace;
         }
 
         .section-description {
-            color: var(--text-secondary);
+            color: #64748b;
             font-size: 1.125rem;
             max-width: 700px;
         }
 
-        /* Cards grid */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -133,20 +98,12 @@
         }
 
         .card {
-            background: var(--primary-bg);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
             padding: 32px;
             text-decoration: none;
             color: inherit;
-            transition: all 0.2s ease;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--border-medium);
         }
 
         .card-header {
@@ -169,20 +126,20 @@
             flex-shrink: 0;
         }
 
-        .card-icon.quiz { background: var(--accent-blue); }
-        .card-icon.article { background: var(--accent-green); }
+        .card-icon.quiz { background: #3b82f6; }
+        .card-icon.article { background: #10b981; }
         .card-icon.project { background: #8b5cf6; }
 
         .card-content h3 {
             font-size: 1.25rem;
             font-weight: 600;
-            color: var(--text-primary);
+            color: #1e293b;
             margin-bottom: 8px;
             line-height: 1.4;
         }
 
         .card-content p {
-            color: var(--text-secondary);
+            color: #64748b;
             font-size: 0.95rem;
             line-height: 1.5;
         }
@@ -190,12 +147,12 @@
         .card-meta {
             margin-top: 16px;
             padding-top: 16px;
-            border-top: 1px solid var(--border-light);
+            border-top: 1px solid #e2e8f0;
             display: flex;
             align-items: center;
             gap: 12px;
             font-size: 0.875rem;
-            color: var(--text-muted);
+            color: #94a3b8;
         }
 
         .status-badge {
@@ -208,56 +165,29 @@
         }
 
         .status-badge.active {
-            background: var(--accent-green-light);
-            color: var(--accent-green);
+            background: #d1fae5;
+            color: #10b981;
         }
 
         .status-badge.coming-soon {
-            background: var(--accent-bg);
-            color: var(--text-muted);
+            background: #f1f5f9;
+            color: #94a3b8;
         }
 
-        /* Featured content */
-        .featured-card {
-            background: linear-gradient(135deg, var(--accent-blue-light) 0%, var(--accent-green-light) 100%);
-            border: 1px solid var(--accent-blue);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .featured-badge {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: var(--accent-blue);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.025em;
-        }
-
-        /* Footer */
         footer {
-            background: var(--secondary-bg);
-            border-top: 1px solid var(--border-light);
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
             padding: 48px 0;
             margin-top: 80px;
-        }
-
-        .footer-content {
             text-align: center;
-            color: var(--text-secondary);
         }
 
-        .footer-content p {
+        footer p {
+            color: #64748b;
             font-size: 0.95rem;
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Responsive design */
         @media (max-width: 768px) {
             .container {
                 padding: 0 20px;
@@ -296,21 +226,6 @@
                 padding: 32px 0 48px;
             }
         }
-
-        @media (max-width: 480px) {
-            .card-header {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 12px;
-            }
-
-            .nav-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 16px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -327,6 +242,7 @@
                         <a href="#projects" class="nav-link">Projects</a>
                         <a href="#quizzes" class="nav-link">Quizzes</a>
                         <a href="about.html" class="nav-link">About</a>
+                        <a href="resume-applications/resume.html" class="nav-link">Resume</a>
                     </div>
                 </nav>
             </div>
@@ -378,8 +294,7 @@
                     </p>
                 </div>
                 <div class="cards-grid">
-                    <a href="articles/ds&a/binary-search.html" class="card featured-card">
-                        <div class="featured-badge">Featured</div>
+                    <a href="articles/ds&a/binary-search.html" class="card">
                         <div class="card-header">
                             <div class="card-icon article">B</div>
                             <div class="card-content">
