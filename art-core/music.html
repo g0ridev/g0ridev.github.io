@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music & Audio Programming</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+        }
+        
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            font-weight: normal;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+        
+        .back-link {
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .back-link a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .track-entry {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: white;
+            border: 1px solid #e5e5e5;
+        }
+        
+        .track-title {
+            font-size: 1.3em;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .track-meta {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .track-description {
+            margin-bottom: 20px;
+        }
+        
+        .track-links {
+            margin-bottom: 20px;
+        }
+        
+        .track-link {
+            display: inline-block;
+            margin-right: 15px;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background: #2c5aa0;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        
+        .track-link:hover {
+            background: #1e3d6f;
+        }
+        
+        .code-block {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        
+        .code-toggle {
+            background: #e8e8e8;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.8em;
+            margin-bottom: 10px;
+        }
+        
+        .code-toggle:hover {
+            background: #ddd;
+        }
+        
+        .code-content {
+            display: none;
+        }
+        
+        .code-content.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="back-link">
+        <a href="art-index.html">← Back to Art Index</a>
+    </div>
+    
+    <h1>Music & Audio Programming</h1>
+    
+    <div class="track-entry">
+        <div class="track-title">Industrial Rhythms</div>
+        <div class="track-meta">Strudel | 9/25/28 </div>
+        <div class="track-description">
+            Layered composition using TR-808 drums, distorted bass, and processed vinyl noise. 
+            Explores industrial textures through digital manipulation and euclidean rhythms. 
+            Built around a simple chord progression with heavy processing and probabilistic elements. 
+            I was experimenting with euclid() function of strudel. Mainly tryign to find good melodies in a quick way.
+        </div>
+        
+        <div class="track-links">
+            <a href="https://strudel.cc/#c2V0Y3BtKDYwKQpjb25zdCBkcnVtcyA9IHMoInRyODA4X2JkIikuc2xvdygyKQoubHBmKDIwMCkuY3J1c2goOCkuZ2FpbigwLjgpCi5kaXN0b3J0KDIpLmNydXNoKDEwKS5nYWluKDAuMikKCmNvbnN0IGJhc3MgPSBub3RlKCJjMiB%2BIH4gZWIyIH4gZjIgfiB%2BIikucygiZ21fc3ludGhfYmFzc18xIikuc2xvdygyKQoubHBmKDI1MCkuc2hhcGUoMC41KS5nYWluKDAuNikKCmNvbnN0IHNuYXJlID0gcygifiB%2BIH4gdHI4MDhfY3AiKS5nYWluKDAuNykucm9vbSgwLjMpLmNydXNoKDQpLnNsb3coMikKCmRydW1zLnN0YWNrKHNuYXJlLGJhc3MpCgpjb25zdCB2aW55bCA9IHMoIndoaXRlIikuc2xvdygzKS5nYWluKDAuMSkKLmhwZig0MDAwKS5jcnVzaCg2KQoKdmlueWwuc3RhY2soZHJ1bXMsc25hcmUsYmFzcykKCmNvbnN0IHBpYW5vID0gbm90ZSgiYzMgZWIzIH4gZjMgfiB%2BIGViMyB%2BIikucygiZ21fcGlhbm8iKS5zbG93KDIpLnNvbWV0aW1lcyh4PT54LmV1Y2xpZCgzLDQpKQoubHBmKDYwMCkuY3J1c2goOCkucm9vbSgwLjMpLmdhaW4oMC40KQoKY29uc3QgY2hvcmRzID0gbm90ZSgiPFtkMyxmMyxhM10gW2czLGJiMyxkNF0gW2EzLGM0LGU0XSBbZDMsZjMsYTNdID4iKS5zKCJmbXBpYW5vIikuc2xvdyg0KQoubHBmKDgwMCkuZ2FpbigwLjMpLmV1Y2xpZCgzLDQpCnBpYW5vLnN0YWNrKGRydW1zLHNuYXJlLGJhc3MsdmlueWwsY2hvcmRzKQ%3D%3D" class="track-link" target="_blank">Play in Strudel</a>
+        </div>
+        
+        <button class="code-toggle" onclick="toggleCode('code1')">Show/Hide Code</button>
+        <div id="code1" class="code-content">
+            <div class="code-block">setcpm(60)
+const drums = s("tr808_bd").slow(2)
+.lpf(200).crush(8).gain(0.8)
+.distort(2).crush(10).gain(0.2)
+
+const bass = note("c2 ~ ~ eb2 ~ f2 ~ ~").s("gm_synth_bass_1").slow(2)
+.lpf(250).shape(0.5).gain(0.6)
+
+const snare = s("~ ~ ~ tr808_cp").gain(0.7).room(0.3).crush(4).slow(2)
+
+drums.stack(snare,bass)
+
+const vinyl = s("white").slow(3).gain(0.1)
+.hpf(4000).crush(6)
+
+vinyl.stack(drums,snare,bass)
+
+const piano = note("c3 eb3 ~ f3 ~ ~ eb3 ~").s("gm_piano").slow(2).sometimes(x=>x.euclid(3,4))
+.lpf(600).crush(8).room(0.3).gain(0.4)
+
+const chords = note("<[d3,f3,a3] [g3,bb3,d4] [a3,c4,e4] [d3,f3,a3] >").s("fmpiano").slow(4)
+.lpf(800).gain(0.3).euclid(3,4)
+piano.stack(drums,snare,bass,vinyl,chords)</div>
+        </div>
+    </div>
+    
+    <!-- Template for future tracks -->
+    <!--
+    <div class="track-entry">
+        <div class="track-title">Track Title</div>
+        <div class="track-meta">Strudel | Date</div>
+        <div class="track-description">
+            Description of the track, techniques used, inspiration, etc.
+        </div>
+        
+        <div class="track-links">
+            <a href="strudel_url_here" class="track-link" target="_blank">Play in Strudel</a>
+        </div>
+        
+        <button class="code-toggle" onclick="toggleCode('codeN')">Show/Hide Code</button>
+        <div id="codeN" class="code-content">
+            <div class="code-block">code here</div>
+        </div>
+    </div>
+    -->
+
+    <script>
+        function toggleCode(elementId) {
+            const element = document.getElementById(elementId);
+            element.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
