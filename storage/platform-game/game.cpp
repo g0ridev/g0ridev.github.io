@@ -25,11 +25,9 @@ int main(void)
     
 
 
-    float groundY = 500.0;
-    float groundHeight = 100.0;
     float velocityX = 0.0;
     float velocityY = 0.0;
-    float jumpPower = -400.0;
+    float jumpPower = -800.0;
     float gravity = 980.0;
     
     bool isOnGround = false;
@@ -42,10 +40,22 @@ int main(void)
     int levelMap[LEVEL_HEIGHT][LEVEL_WIDTH] = {
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,0,0,0,0,0,0,1},
         {1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,0,0,0,0,0,0,1},
+        {1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,0,0,0,0,0,0,1},
+        {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1},
+        {1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,0,0,0,0,0,0,1},
+        {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1},
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     };
 
@@ -57,7 +67,7 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "first-platformer");
     
 
-    texture2d tileset =  loadTexture("tileset_full.png");
+    Texture2D tileset =  LoadTexture("tileset_full.png");
     Texture2D background = LoadTexture("blue-sky.jpg");
     Texture2D background2 = LoadTexture("death-screen.jpg");
     Texture2D knight = LoadTexture("knight.png");
@@ -68,6 +78,73 @@ int main(void)
     {
         float movementSpeed = 300.0;
         float deltaTime = GetFrameTime();
+        // Apply gravity first
+        velocityY += gravity * deltaTime;
+
+        // Move player
+        playerX += velocityX * deltaTime;
+        playerY += velocityY * deltaTime;
+
+        // Reset ground state
+        isOnGround = false;
+
+        // Check collisions with tiles
+        for(int y = 0; y < LEVEL_HEIGHT; y++){
+            for(int x = 0; x < LEVEL_WIDTH; x++){  // FIXED: was LEVEL_HEIGHT
+                if(levelMap[y][x] == 1){
+                    Rectangle tileRect = {x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE};
+                    Rectangle playerRect = {playerX, playerY, playerWidth, playerHeight};
+
+                    if(CheckCollisionRecs(playerRect, tileRect)){
+                        // Calculate overlap on each axis
+                        float overlapX = 0;
+                        float overlapY = 0;
+                        
+                        // Calculate which side has less overlap (that's the collision side)
+                        float leftOverlap = (playerX + playerWidth) - tileRect.x;
+                        float rightOverlap = (tileRect.x + TILE_SIZE) - playerX;
+                        float topOverlap = (playerY + playerHeight) - tileRect.y;
+                        float bottomOverlap = (tileRect.y + TILE_SIZE) - playerY;
+                        
+                        // Find minimum overlap
+                        float minOverlap = leftOverlap;
+                        int collisionSide = 0; // 0=left, 1=right, 2=top, 3=bottom
+                        
+                        if(rightOverlap < minOverlap){
+                            minOverlap = rightOverlap;
+                            collisionSide = 1;
+                        }
+                        if(topOverlap < minOverlap){
+                            minOverlap = topOverlap;
+                            collisionSide = 2;
+                        }
+                        if(bottomOverlap < minOverlap){
+                            minOverlap = bottomOverlap;
+                            collisionSide = 3;
+                        }
+                        
+                        // Resolve collision based on side
+                        if(collisionSide == 0){ // Hit left side of tile
+                            playerX = tileRect.x - playerWidth;
+                            velocityX = 0;
+                        }
+                        else if(collisionSide == 1){ // Hit right side of tile
+                            playerX = tileRect.x + TILE_SIZE;
+                            velocityX = 0;
+                        }
+                        else if(collisionSide == 2){ // Hit top of tile (landing)
+                            playerY = tileRect.y - playerHeight;
+                            velocityY = 0;
+                            isOnGround = true;
+                        }
+                        else if(collisionSide == 3){ // Hit bottom of tile (bonk head)
+                            playerY = tileRect.y + TILE_SIZE;
+                            velocityY = 0;
+                        }
+                    }
+                }
+            }
+        }
 
 
         if(IsKeyDown(KEY_LEFT)){
@@ -80,15 +157,11 @@ int main(void)
 
 
 
-        if(IsKeyDown(KEY_SPACE)){
-            playerY += jumpPower * deltaTime;
-            isOnGround = false;
+        if(IsKeyDown(KEY_SPACE) && isOnGround){
+            velocityY = jumpPower;
         }
 
-        velocityY += gravity * deltaTime;
 
-        playerX += velocityX * deltaTime;
-        playerY += velocityY * deltaTime;
 
 
 
@@ -104,8 +177,8 @@ int main(void)
             playerY = 0;
             velocityY = 0;
         }
-        if(playerY + playerHeight > screenHeight - groundHeight){
-            playerY = (screenHeight - groundHeight) - playerHeight;
+        if(playerY + playerHeight > screenHeight){
+            playerY = screenHeight - playerHeight;
             velocityY = 0;
             isOnGround = true;
         }
@@ -119,7 +192,7 @@ int main(void)
             playerY < enemyY + enemyHeight && 
             playerY + playerHeight > enemyY){  // Changed < to >
                 playerX = 100.0;
-                playerY = 400.0;  // Also fix this - 800 is off-screen!
+                playerY = 400.0; 
                 velocityX = 0.0;
                 velocityY = 0.0;
                 isPlayerDead = true;
@@ -136,16 +209,6 @@ int main(void)
 
         BeginDrawing();
 
-            for(int y = 0; y < LEVEL_HEIGHT; y++){
-                for(int x = 0; x < LEVEL_WIDTH; x++){
-                    if(levelMap[x][y] == 1){
-                        Rectangle sourceRec = {0, 0, TILE_SIZE, TILE_SIZE};  // Which tile in tileset
-                        Rectangle destRec = {x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE};
-                        DrawTexturePro(tileset, sourceRec, destRec, (Vector2){0, 0}, 0.0f, WHITE);
-
-                    }
-                }
-            }
 
 
 
@@ -186,9 +249,20 @@ int main(void)
 
             }
             
-            DrawRectangle(playerX,playerY,playerWidth,playerHeight,BLANK);
+            DrawRectangle(playerX,playerY,playerWidth,playerHeight,RED);
             DrawRectangle(enemyX,enemyY,enemyWidth,enemyHeight,RED);
-            DrawRectangle(0,groundY,screenWidth,groundHeight,GREEN);
+
+            for(int y = 0; y < LEVEL_HEIGHT; y++){
+                for(int x = 0; x < LEVEL_WIDTH; x++){
+                    if(levelMap[y][x] == 1){
+                        Rectangle sourceRec = {0, 0, TILE_SIZE, TILE_SIZE};  // Which tile in tileset
+                        Rectangle destRec = {x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE};
+                        DrawTexturePro(tileset, sourceRec, destRec, (Vector2){0, 0}, 0.0f, WHITE);
+
+                    }
+                }
+            }
+
 
             }
 
@@ -201,6 +275,7 @@ int main(void)
     UnloadTexture(background);
     UnloadTexture(background2); 
     UnloadTexture(knight);
+    UnloadTexture(tileset);
     CloseWindow();      
     
     
