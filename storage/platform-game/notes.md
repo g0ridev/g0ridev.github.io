@@ -1,9 +1,33 @@
+finaL
+win condition level when all levels completed
+portal moves character to next level 
+enemy and hazards(spikes and moving enemies) x no moving enemies just spikes
+3-5 levels to design
+
+
+
+
+
+
+
+
 todo:
-need enemies on contact to cuase player to reset to spawn
+align sprite to collision box better to touch ground
+blocks collide now, need to add spikes that kill player. enemy collision box to spike.
+walking sprite animation
+make sprite turn during the character moving. turns backgrounds in direction knight is walking.
+block
+
+
+
+
+
+
+
 
 polish:
 - quirk with jumping spacebar does it more than once.s
-
+- knight flowing cape when he's falling.
 
 
 scale background correctly play state and death screen
