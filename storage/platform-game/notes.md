@@ -1,8 +1,26 @@
 finaL
 win condition level when all levels completed
-portal moves character to next level 
-enemy and hazards(spikes and moving enemies) x no moving enemies just spikes
-3-5 levels to design
+portal moves character to next level  
+3-5 levels to design 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+polish:
+different blocks green
+different background, orange png?
+add dark blocks around outside. or just the collsion blocks?
+knight turns direction you move
 
 
 

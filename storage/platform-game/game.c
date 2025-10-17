@@ -79,6 +79,38 @@ void UnloadLevel(Level* level) {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 int main(void)
 {
     const int screenWidth = 800;
@@ -98,21 +130,26 @@ int main(void)
     float playerHeight = 50.0;
 
     bool isPlayerDead = false;
+    int PlayerLives = 3;
     int currentLevelNumber = 1;
+
+    bool playerWin = false;
 
     float velocityX = 0.0;
     float velocityY = 0.0;
-    float jumpPower = -800.0;
+    float jumpPower = -600.0;
     float gravity = 980.0;
     
     bool isOnGround = false;
 
     InitWindow(screenWidth, screenHeight, "first-platformer");
     
+    Texture2D coins = LoadTexture("coin.png");
     Texture2D spikes = LoadTexture("spike.png");
     Texture2D tileset = LoadTexture("tileset_full.png");
-    Texture2D background = LoadTexture("blue-sky.jpg");
+    Texture2D background = LoadTexture("afternoon-sky.jpg");
     Texture2D background2 = LoadTexture("death-screen.jpg");
+    Texture2D background3 = LoadTexture("blue-sky.jpg");
     Texture2D knight = LoadTexture("knight.png");
 
     SetTargetFPS(60);
@@ -248,14 +285,33 @@ int main(void)
                 (Vector2){0, 0}, 0.0f, WHITE);
             DrawText("You Died!", screenWidth/2 - 100, screenHeight/2 - 100, 40, RED);
             DrawText("Press Enter to Restart.", screenWidth/2 - 250, screenHeight/2 - 50, 40, RED);
-            DrawText("Press Escape to exit.", screenWidth/2 - 250, screenHeight/2, 40, RED);
 
             if(IsKeyPressed(KEY_ENTER)){
                 playerX = currentLevel.playerStartX;
                 playerY = currentLevel.playerStartY;
                 velocityX = 0;
                 velocityY = 0;
+                PlayerLives = 3;
                 isPlayerDead = false;
+            }
+        }
+        else if(playerWin == true){
+            DrawTexturePro(background3, 
+                (Rectangle){0, 0, (float)background3.width, (float)background3.height},
+                (Rectangle){0, 0, screenWidth, screenHeight},
+                (Vector2){0, 0}, 0.0f, WHITE);
+            DrawText("You Won!", screenWidth/2 - 100, screenHeight/2 - 100, 40, BLUE);
+            DrawText("Press Enter to Restart.", screenWidth/2 - 250, screenHeight/2 - 50, 40, BLUE);
+
+            if(IsKeyPressed(KEY_ENTER)){
+                playerX = currentLevel.playerStartX;
+                playerY = currentLevel.playerStartY;
+                velocityX = 0;
+                velocityY = 0;
+                PlayerLives = 3;
+                isPlayerDead = false;
+                playerWin = false;
+                
             }
         }
         else {
@@ -319,7 +375,42 @@ int main(void)
                         DrawTexturePro(spikes, sourceRec, destRec, (Vector2){0, 0}, 0.0f, WHITE);
 
                         if(CheckCollisionRecs(playerRect, destRec)){
-                            isPlayerDead = true;
+                            PlayerLives--;
+
+                            if(PlayerLives <= 0){
+                                isPlayerDead = true;
+                            }
+                            else{
+                                playerX = currentLevel.playerStartX;
+                                playerY = currentLevel.playerStartY;
+                                velocityX = 0.0;
+                                velocityY = 0.0;
+                            }
+                        }
+
+                        
+                    }
+
+                    //draw coins
+
+                    if(currentLevel.tiles[y][x] == 3){
+                        float coinWidth = (float)coins.width / 12.0f;
+                        float coinHeight = (float)coins.height;
+                        
+                        // Grab the FIRST spike variant (index 0)
+                        // Change the 0 to 1, 2, or 3 for different spike variants
+                        Rectangle sourceRec = {0 * coinWidth, 0, coinWidth, coinHeight};
+                        Rectangle destRec = {
+                            x * currentLevel.tileSize, 
+                            y * currentLevel.tileSize, 
+                            (float)currentLevel.tileSize, 
+                            (float)currentLevel.tileSize
+                        };
+                        DrawTexturePro(coins, sourceRec, destRec, (Vector2){0, 0}, 0.0f, WHITE);
+
+                        if(CheckCollisionRecs(playerRect, destRec)){
+                            playerWin = true;
+
                         }
 
                         
@@ -329,6 +420,8 @@ int main(void)
 
             // Level indicator
             DrawText(TextFormat("Level %d", currentLevelNumber), 10, 10, 20, WHITE);
+            DrawText(TextFormat("Lives: %d", PlayerLives), 10, 40, 20, YELLOW);
+
         }
 
         EndDrawing();
@@ -337,9 +430,11 @@ int main(void)
     UnloadLevel(&currentLevel);
     UnloadTexture(background);
     UnloadTexture(background2); 
+    UnloadTexture(background3);
     UnloadTexture(knight);
     UnloadTexture(spikes);
     UnloadTexture(tileset);
+    UnloadTexture(coins);
     CloseWindow();
     
     return 0;
